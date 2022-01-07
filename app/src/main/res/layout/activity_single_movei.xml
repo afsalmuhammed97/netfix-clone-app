@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detials.singleMovei">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/error_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="connection error" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ScrollViewCount">
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical">
+                 <ImageView
+                     android:id="@+id/movie_poster"
+                     android:layout_width="match_parent"
+                     android:layout_height="500dp"
+                     android:layout_gravity="center"
+                     android:scaleType="centerCrop"
+                     android:src="@drawable/music1"
+                     android:contentDescription="@string/trendingNow" />
+
+
+            <TextView
+                android:layout_marginStart="15dp"
+                android:layout_marginVertical="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/movie_title"
+                android:textColor="@color/black"
+                android:text="Movie"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                />
+                 <TextView
+                     android:layout_marginVertical="1dp"
+                     android:layout_marginStart="15dp"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/sub_title"
+                     android:text="sub_title"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="14sp"
+                     />
+                 <TextView
+                     android:layout_marginVertical="1dp"
+                     android:layout_marginStart="15dp"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/movie_info"
+                     android:text="movie info"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="12sp"
+                     />
+
+                 <TextView
+                     android:layout_marginVertical="1dp"
+                     android:layout_marginStart="15dp"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/release_year"
+                     android:text="2012"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="14sp"
+                     />
+
+
+             </LinearLayout>
+
+
+>
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                >-->
+
+<!--&lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/movie_release_year"-->
+<!--                    android:text="2000"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="12sp"-->
+<!--                    />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/movie_rating"-->
+<!--                    android:text="8"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_marginTop="2dp"-->
+<!--                    android:textSize="12sp"-->
+<!--                    />-->
+<!--            </LinearLayout>-->
+
+
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

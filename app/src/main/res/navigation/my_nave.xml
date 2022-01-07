@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nave"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.practies.retrofitapplication.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/comingSoonFragment"
+        android:name="com.practies.retrofitapplication.ComingSoonFragment"
+        android:label="fragment_coming_soon"
+        tools:layout="@layout/fragment_coming_soon" />
+    <fragment
+        android:id="@+id/fastLaughsFragment"
+        android:name="com.practies.retrofitapplication.FastLaughsFragment"
+        android:label="fragment_fast_laughs"
+        tools:layout="@layout/fragment_fast_laughs" />
+    <fragment
+        android:id="@+id/downloadsFragment"
+        android:name="com.practies.retrofitapplication.DownloadsFragment"
+        android:label="fragment_downloads"
+        tools:layout="@layout/fragment_downloads" />
+</navigation>

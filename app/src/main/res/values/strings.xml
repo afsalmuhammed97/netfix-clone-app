@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">RetrofitApplication</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="first">first fragment</string>
+    <string name="second">second fragment</string>
+    <string name="third">third fragment</string>
+    <string name="fourth">fourth fragment</string>
+    <string name="home">Home</string>
+    <string name="comingSoon">ComingSoon</string>
+    <string name="fastLaugh">FastLaughs</string>
+    <string name="downloads">Downloads</string>
+    <string name="myPlayList">MyList</string>
+    <string name="play">Play</string>
+    <string name="info">Info</string>
+    <string name="popularOnNetflix">Popular on Netflix</string>
+    <string name="topTenIn">Top 10 in India Today</string>
+    <string name="trendingNow">Trending Now</string>
+    <string name="remindMe">Remind Me</string>
+    <string name="movieName">Movie Name:::::::</string>
+    <string name="share">Share:</string>
+    <string name="smartDownLoad">Smart Download</string>
+    <string name="movieDetails">18+ |5 Episodes|4.8GB</string>
+
+
+
+    <string name="like">5.2 K</string>
+
+
+
+
+
+    <string name="movieDescription">dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</string>
+
+
+</resources>

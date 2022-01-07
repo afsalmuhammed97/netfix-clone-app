@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+   android:background="@color/black"
+    tools:context=".HomeFragment">
+
+    <ScrollView
+        android:id="@+id/mainScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+     android:paddingBottom="25dp"
+        tools:ignore="UselessParent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:weightSum="2"
+    android:layout_marginTop="15dp"
+    android:layout_marginHorizontal="25dp"
+    android:orientation="vertical"
+    >
+
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+<!--        android:adjustViewBounds="true"
+ android:layout_weight="1"-->
+        <ProgressBar
+            android:id="@+id/progress_bar0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+        <ImageView
+             android:id="@+id/main_img"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+           android:src="@drawable/music1"
+          android:layout_width="match_parent"
+
+            android:contentDescription="@string/popularOnNetflix" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
+    <LinearLayout
+
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:weightSum="3"
+
+        >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:maxHeight="50dp"
+            android:backgroundTint="@color/black"
+            android:layout_height="60dp"
+            android:drawableTop="@drawable/add_icon"
+            android:text="@string/myPlayList"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:maxHeight="50dp"
+            android:backgroundTint="@color/white"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:drawableLeft="@drawable/play_icon"
+            android:text="@string/play"
+            android:textSize="12sp"
+            android:layout_marginBottom="3dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
+            style="?android:attr/buttonBarButtonStyle" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/black"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/info_icon"
+            android:text="@string/info"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            style="?android:attr/buttonBarButtonStyle" />
+
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:layout_marginTop="30dp"
+        android:paddingStart="0dp"
+        android:text="@string/popularOnNetflix"
+        tools:ignore="RtlSymmetry" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/firstRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        />
+<!--    android:scrollbars="horizontal"-->
+    <TextView
+        android:id="@+id/error_text"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:visibility="gone"/>
+
+<ProgressBar
+    android:id="@+id/progress_bar1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="gone"/>
+
+
+
+
+<!--    android:maxHeight="100dp"-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:layout_marginTop="30dp"
+        android:paddingStart="0dp"
+        android:text="@string/topTenIn"
+        tools:ignore="RtlSymmetry" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/secondRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"/>
+    <ProgressBar
+        android:id="@+id/progress_bar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:layout_marginTop="30dp"
+        android:paddingStart="0dp"
+        android:text="@string/trendingNow"
+        tools:ignore="RtlSymmetry" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/thirdRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:maxHeight="100dp"
+        android:orientation="horizontal"/>
+    <ProgressBar
+        android:id="@+id/progress_bar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+
+
+
+</LinearLayout>
+
+
+    </ScrollView>
+
+</FrameLayout>
