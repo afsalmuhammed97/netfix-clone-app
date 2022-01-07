@@ -26,6 +26,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/// commit a067f2b4aa78811d4b6aa2e8357df92b3522afd4  on git
 
 class HomeFragment : Fragment() {
     companion object{ var testList= listOf<Result>()   }
