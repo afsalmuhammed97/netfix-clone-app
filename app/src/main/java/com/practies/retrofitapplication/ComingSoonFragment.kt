@@ -5,34 +5,43 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.practies.retrofitapplication.adapters.ComingSoonPageAdapter
 import com.practies.retrofitapplication.databinding.FragmentComingSoonBinding
+import com.practies.retrofitapplication.viewModel.MoviesViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.combine
 
-
+@AndroidEntryPoint
 class ComingSoonFragment : Fragment() {
 
+    private val viewModel:MoviesViewModel  by viewModels()
 lateinit var binding: FragmentComingSoonBinding
 lateinit var comingSoonPageAdapter: ComingSoonPageAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
          binding= FragmentComingSoonBinding.inflate(inflater,container,false)
 
 
-           comingSoonPageAdapter= ComingSoonPageAdapter(HomeFragment.testList)
-        binding.coningSoonRv.hasFixedSize()
-        binding.coningSoonRv.layoutManager =
-            LinearLayoutManager(context )
-        binding.coningSoonRv.setItemViewCacheSize(12)
-        binding.coningSoonRv.adapter =comingSoonPageAdapter
 
 
+          setView()
         return binding.root
     }
 
-      //https://play.google.com/store/apps/details?id=com.practies.musicapp
+    private fun setView() {
+        comingSoonPageAdapter= ComingSoonPageAdapter()
+
+        binding.coningSoonRv.apply {
+            adapter =comingSoonPageAdapter
+            layoutManager = LinearLayoutManager(context )
+            setItemViewCacheSize(12)
+        }
+
+
+    }
+
+    //https://play.google.com/store/apps/details?id=com.practies.musicapp
 }

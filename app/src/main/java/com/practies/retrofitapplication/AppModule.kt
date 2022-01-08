@@ -5,6 +5,7 @@ import com.practies.retrofitapplication.helper.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.internal.managers.ApplicationComponentManager
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 
 
 @Module
-@InstallIn(SingletonComponent::class)                                          //ApplicationComponent
+     @InstallIn(SingletonComponent::class)                                          //ApplicationComponent  SingletonComponent::class
 object AppModule {
 
     @Provides

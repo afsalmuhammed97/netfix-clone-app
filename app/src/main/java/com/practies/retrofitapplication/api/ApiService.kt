@@ -1,6 +1,7 @@
 package com.practies.retrofitapplication.api
 
 import com.practies.retrofitapplication.Movie
+import com.practies.retrofitapplication.helper.Constants.APIKEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -10,7 +11,7 @@ interface ApiService {
    suspend  fun  getUpComingMovies(@Query("api_key")key:String):Response <Movie>
 
    @GET("popular?")
-   suspend fun getPopularMovies(@Query("api_key")key:String):Response<Movie>
+   suspend fun getPopularMovies(@Query("api_key")key:String=APIKEY):Response<Movie>
    @GET("top_rated?")
    suspend fun getTopRatedMovies(@Query("api_key")key: String):Response<Movie>
 
