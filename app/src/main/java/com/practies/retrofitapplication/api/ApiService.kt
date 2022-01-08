@@ -1,16 +1,11 @@
 package com.practies.retrofitapplication.api
 
-import com.practies.retrofitapplication.Constants.APIKEY
-import com.practies.retrofitapplication.Constants.BASE_URL
 import com.practies.retrofitapplication.Movie
-import com.practies.retrofitapplication.MovieResult
-import com.practies.retrofitapplication.Result
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MovieDb {
+interface ApiService {
     @GET("upcoming?")            //BASE_URL@Query("api_key"
    suspend  fun  getUpComingMovies(@Query("api_key")key:String):Response <Movie>
 

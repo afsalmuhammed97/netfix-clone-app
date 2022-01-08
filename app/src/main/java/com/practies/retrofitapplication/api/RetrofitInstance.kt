@@ -1,6 +1,6 @@
 package com.practies.retrofitapplication.api
 
-import com.practies.retrofitapplication.Constants.BASE_URL
+import com.practies.retrofitapplication.helper.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -15,9 +15,9 @@ object RetrofitInstance {
 
 
 
-    val api:MovieDb by lazy {
+    val API:ApiService by lazy {
 
-          retrofit.create(MovieDb::class.java)
+          retrofit.create(ApiService::class.java)
 
     }
 

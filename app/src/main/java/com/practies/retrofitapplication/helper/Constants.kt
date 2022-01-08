@@ -1,4 +1,4 @@
-package com.practies.retrofitapplication
+package com.practies.retrofitapplication.helper
 
 object Constants {
 

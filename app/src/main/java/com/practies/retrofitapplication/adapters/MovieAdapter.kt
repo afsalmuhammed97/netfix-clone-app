@@ -19,12 +19,31 @@ import com.practies.retrofitapplication.Result
 import com.practies.retrofitapplication.databinding.MovieViewBinding
 import com.practies.retrofitapplication.databinding.SampleViewBinding
 
-//List<MovieResult>  ( val movieList:List<MovieResult>)
-class MovieAdapter(var movies: List<Result> ) :RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
+//   (var movies: List<Result> )
+class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
 
     class MovieHolder(val binding:MovieViewBinding):RecyclerView.ViewHolder(binding.root)
 
-//
+private val diffCallback = object :DiffUtil.ItemCallback<Result>(){
+    override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
+
+    return  oldItem.id==newItem.id
+
+    }
+
+    override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
+    return newItem ==oldItem
+    }
+
+}
+
+    private val   differ=AsyncListDiffer(this,diffCallback)
+
+    var movies:List<Result>
+    get() = differ.currentList
+          set(value) {
+              differ.submitList(value)
+          }
 
     override fun getItemCount()=movies.size
 
