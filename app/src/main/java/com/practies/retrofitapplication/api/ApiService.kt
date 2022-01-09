@@ -8,18 +8,21 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("upcoming?")            //BASE_URL@Query("api_key"
-   suspend  fun  getUpComingMovies(@Query("api_key")key:String):Response <Movie>
+   suspend  fun  getUpComingMovies(@Query("api_key")key:String =APIKEY):Response <Movie>
 
    @GET("popular?")
    suspend fun getPopularMovies(@Query("api_key")key:String=APIKEY):Response<Movie>
    @GET("top_rated?")
-   suspend fun getTopRatedMovies(@Query("api_key")key: String):Response<Movie>
+   suspend fun getTopRatedMovies(@Query("api_key")key: String=APIKEY):Response<Movie>
 
     @GET("now_playing?")
-    suspend fun getNowPlaying(@Query("api_key")key: String):Response<Movie>
+    suspend fun getNowPlaying(@Query("api_key")key: String =APIKEY):Response<Movie>
 
-    @GET("latest?")
-    suspend fun getLatest(@Query("api_key")key: String):Response<Movie>
+//    @GET("latest?")
+//    suspend fun getLatest(@Query("api_key")key: String =APIKEY):Response<Movie>
+
+
+
 }
 
 ///e4bbe4d35eb4b28c8b0083304f7b662f

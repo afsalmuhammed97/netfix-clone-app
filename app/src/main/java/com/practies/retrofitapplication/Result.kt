@@ -1,16 +1,24 @@
 package com.practies.retrofitapplication
 
+import android.os.Parcelable
 import java.io.Serializable
+
 
 data class Result(
     val adult: Boolean,
-    var backdrop_path: String,
-    var id: Int,
-    var original_language: String,
-    var overview: String,
-    var poster_path: String,
-    var release_date: String,
-    var title: String,
+    val backdrop_path: String,
+    val genre_ids: List<Int>,
+    val id: Int,
+    val original_language: String,
+    val original_title: String,
+    val overview: String,
+    val popularity: Double,
+    val poster_path: String,
+    val release_date: String,
+    val title: String,
+    val video: Boolean,
+    val vote_average: Double,
+    val vote_count: Int
 
     ):Serializable
 

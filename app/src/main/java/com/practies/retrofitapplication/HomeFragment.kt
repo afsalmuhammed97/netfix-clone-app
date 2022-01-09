@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.practies.retrofitapplication.helper.Constants.APIKEY
@@ -15,6 +17,8 @@ import com.practies.retrofitapplication.helper.Constants.BASE_URL
 import com.practies.retrofitapplication.adapters.MovieAdapter
 import com.practies.retrofitapplication.api.ApiService
 import com.practies.retrofitapplication.databinding.FragmentHomeBinding
+import com.practies.retrofitapplication.repository.MovieRepository
+import com.practies.retrofitapplication.viewModel.MovieViewModelFactory
 import com.practies.retrofitapplication.viewModel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -22,22 +26,27 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.internal.notifyAll
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 /// commit a067f2b4aa78811d4b6aa2e8357df92b3522afd4  on git
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class HomeFragment : Fragment() {
     companion object {
         var testList = listOf<Result>()
     }
 
-    private val viewModel: MoviesViewModel by viewModels()
+   // private val viewModel: MoviesViewModel     by viewModels()
 
+    lateinit var viewModel:MoviesViewModel
 
     lateinit var binding: FragmentHomeBinding
-    var movieAdapter: MovieAdapter? = null
+   lateinit var popularMovieAdapter: MovieAdapter
+   lateinit var topRatedMovieAdapter: MovieAdapter
+   lateinit var upCominingMovieAdapter: MovieAdapter
+
     var successRequest: Boolean = false
 
 
@@ -55,14 +64,18 @@ class HomeFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
+        val repository=MovieRepository()
+        val viewModelFactory=MovieViewModelFactory(repository)
+
+        viewModel=ViewModelProvider(this,viewModelFactory).get(MoviesViewModel::class.java)
 //        if (!successRequest){  binding.progressBar1.visibility = View.VISIBLE
 //                                binding.progressBar2.visibility = View.VISIBLE
 //                                binding.progressBar3.visibility = View.VISIBLE }
-
+//
 
         //  makeApiRequestAndShowResult()
 
@@ -76,49 +89,122 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        setMovieView()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     private fun setMovieView() {
-        movieAdapter = MovieAdapter()
 
-
-           binding.firstRv.apply {
-                      adapter=movieAdapter
-               layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-               setHasFixedSize(true)
-               setItemViewCacheSize(12)
-
-
-           }
-        binding.secondRv.apply {
-            adapter=movieAdapter
-            layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            setHasFixedSize(true)
-            setItemViewCacheSize(12)
-
-
-        }
-
-        binding.thirdRv.apply {
-            adapter=movieAdapter
-            layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            setHasFixedSize(true)
-            setItemViewCacheSize(12)
-
-
-        }
-
-
-        viewModel.responseMovie.observe(requireActivity()       ,{listMovies ->
-           movieAdapter!!.movies=listMovies.results
-
-
-            val img =listMovies.results[0]
+        viewModel.popularMoviesLiveData.observe(viewLifecycleOwner,{Response->
+            if (Response.isSuccessful && Response.code()==200){
+                Response.body().let { popularMovie->
+                    if (popularMovie != null) {
+                        popularMovieAdapter.movies=popularMovie.results
+                          popularMovieAdapter.notifyDataSetChanged()
+                        val img =popularMovie.results[0]
             Glide.with(requireContext())
                 .load("http://image.tmdb.org/t/p/w500${img.poster_path}")
                 .centerCrop()
                 .into(binding.mainImg)
 
+                        Toast.makeText(context,"data exist",Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(context,"data null",Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+            }else{
+                binding.progressBar1.visibility = View.VISIBLE
+                binding.progressBar0.visibility = View.VISIBLE
+            }
 
         })
+        binding.firstRv.apply {
+            popularMovieAdapter = MovieAdapter()
+            adapter= popularMovieAdapter
+
+            layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+            setItemViewCacheSize(12)
+
+
+        }
+
+
+        viewModel.topRatedMovieLiveData.observe(viewLifecycleOwner,{Response->
+            if (Response.isSuccessful && Response.code()==200){
+                Response.body().let { topRatedMovie->
+                    if (topRatedMovie != null) {
+                       topRatedMovieAdapter.movies=topRatedMovie.results
+                        //trendingMovieAdapter.movies=topRatedMovie.results
+                    }else{
+                        binding.progressBar2.visibility = View.VISIBLE
+                    }
+                }
+            }
+        })
+        binding.secondRv.apply {
+
+            topRatedMovieAdapter= MovieAdapter()
+            adapter=topRatedMovieAdapter
+            layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+            setItemViewCacheSize(12)
+
+
+        }
+
+
+
+
+        viewModel.upComingMovieLiveData.observe(viewLifecycleOwner,{Response->
+
+            if (Response.isSuccessful && Response.code()==200){
+                Response.body().let { upComingMovie->
+                    if (upComingMovie != null) {
+                     upCominingMovieAdapter .movies=upComingMovie.results
+                    }else{
+                        binding.progressBar3.visibility = View.VISIBLE
+                    }
+                }
+            }
+
+//            if (Response.isSuccessful && Response.code()==200){
+//                Response.body().let { trendingMovie->
+//                    if (trendingMovie != null) {
+//                        trendingMovieAdapter.movies=trendingMovie.results
+//                    }
+//                }
+//            }
+
+        })
+
+
+        binding.thirdRv.apply {
+            upCominingMovieAdapter=MovieAdapter()
+            adapter=upCominingMovieAdapter
+            layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+            setItemViewCacheSize(12)
+
+
+        }
+
+
+//        viewModel.responseMovie.observe(requireActivity()       ,{listMovies ->
+//           movieAdapter!!.movies=listMovies.results
+//
+//
+//            val img =listMovies.results[0]
+//            Glide.with(requireContext())
+//                .load("http://image.tmdb.org/t/p/w500${img.poster_path}")
+//                .centerCrop()
+//                .into(binding.mainImg)
+//
+//
+//        })
 
 
     }

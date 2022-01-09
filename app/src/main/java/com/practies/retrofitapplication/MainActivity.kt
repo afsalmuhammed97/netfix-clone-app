@@ -7,7 +7,7 @@ package com.practies.retrofitapplication
  import com.google.android.material.bottomnavigation.BottomNavigationMenuView
  import com.google.android.material.bottomnavigation.BottomNavigationView
  import dagger.hilt.android.AndroidEntryPoint
-@AndroidEntryPoint
+
 
 class MainActivity : AppCompatActivity() {
 
