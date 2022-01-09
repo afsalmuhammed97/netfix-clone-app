@@ -37,15 +37,15 @@ private val diffCallback = object :DiffUtil.ItemCallback<Result>(){
 
 }
 
-    private val   differ=AsyncListDiffer(this,diffCallback)
+    val   differ=AsyncListDiffer(this,diffCallback)
 
-    var movies:List<Result>
-    get() = differ.currentList
-          set(value) {
-              differ.submitList(value)
-          }
+//    var movies:List<Result>
+//    get() = differ.currentList
+//          set(value) {
+//              differ.submitList(value)
+//          }
 
-    override fun getItemCount()=movies.size
+    override fun getItemCount()=differ.currentList.size
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.MovieHolder {
@@ -55,8 +55,8 @@ private val diffCallback = object :DiffUtil.ItemCallback<Result>(){
 
     override fun onBindViewHolder(holder: MovieAdapter.MovieHolder, position: Int) {
 
-     //   val url="http://image.tmdb.org/t/p/w500/+${ movies[position].poster_path}"
-         Glide.with(holder.itemView.context).load("http://image.tmdb.org/t/p/w500${ movies[position].poster_path}")
+                      val movies=differ.currentList[position]
+         Glide.with(holder.itemView.context).load("http://image.tmdb.org/t/p/w500${ movies.poster_path}")
              .apply(RequestOptions.placeholderOf(R.drawable.music1))
              .centerCrop()
              .into(holder.binding.movieImage1)

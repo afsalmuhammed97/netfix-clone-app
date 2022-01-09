@@ -96,20 +96,24 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setMovieView() {
-
+        topRatedMovieAdapter= MovieAdapter()
+        popularMovieAdapter = MovieAdapter()
+        upCominingMovieAdapter=MovieAdapter()
         viewModel.popularMoviesLiveData.observe(viewLifecycleOwner,{Response->
+
             if (Response.isSuccessful && Response.code()==200){
                 Response.body().let { popularMovie->
                     if (popularMovie != null) {
-                        popularMovieAdapter.movies=popularMovie.results
-                          popularMovieAdapter.notifyDataSetChanged()
+                        popularMovieAdapter.differ.submitList(popularMovie.results)
+                        popularMovieAdapter.notifyDataSetChanged()         // movies=popularMovie.results
+                        //  popularMovieAdapter.notifyDataSetChanged()
                         val img =popularMovie.results[0]
             Glide.with(requireContext())
-                .load("http://image.tmdb.org/t/p/w500${img.poster_path}")
-                .centerCrop()
-                .into(binding.mainImg)
+                .load("http://image.tmdb.org/t/p/w500${img.backdrop_path}")    //poster_path
+                //.centerCrop()
+                .fitCenter()
+               .into(binding.mainImg)
 
-                        Toast.makeText(context,"data exist",Toast.LENGTH_SHORT).show()
                     }else{
                         Toast.makeText(context,"data null",Toast.LENGTH_SHORT).show()
                     }
@@ -122,36 +126,37 @@ class HomeFragment : Fragment() {
 
         })
         binding.firstRv.apply {
-            popularMovieAdapter = MovieAdapter()
-            adapter= popularMovieAdapter
 
+            adapter= popularMovieAdapter
             layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
-            setItemViewCacheSize(12)
+            setItemViewCacheSize(20)
 
 
         }
+
 
 
         viewModel.topRatedMovieLiveData.observe(viewLifecycleOwner,{Response->
             if (Response.isSuccessful && Response.code()==200){
                 Response.body().let { topRatedMovie->
                     if (topRatedMovie != null) {
-                       topRatedMovieAdapter.movies=topRatedMovie.results
+                       topRatedMovieAdapter.differ.submitList(topRatedMovie.results)
+                        topRatedMovieAdapter.notifyDataSetChanged()
                         //trendingMovieAdapter.movies=topRatedMovie.results
-                    }else{
-                        binding.progressBar2.visibility = View.VISIBLE
                     }
                 }
+            }else{
+                binding.progressBar2.visibility = View.VISIBLE
             }
         })
         binding.secondRv.apply {
 
-            topRatedMovieAdapter= MovieAdapter()
+
             adapter=topRatedMovieAdapter
             layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
-            setItemViewCacheSize(12)
+            setItemViewCacheSize(20)
 
 
         }
@@ -164,47 +169,30 @@ class HomeFragment : Fragment() {
             if (Response.isSuccessful && Response.code()==200){
                 Response.body().let { upComingMovie->
                     if (upComingMovie != null) {
-                     upCominingMovieAdapter .movies=upComingMovie.results
-                    }else{
-                        binding.progressBar3.visibility = View.VISIBLE
+                    upCominingMovieAdapter.differ.submitList(upComingMovie.results)
+                        upCominingMovieAdapter.notifyDataSetChanged()
                     }
                 }
+
+            }else{
+                binding.progressBar3.visibility = View.VISIBLE
             }
 
-//            if (Response.isSuccessful && Response.code()==200){
-//                Response.body().let { trendingMovie->
-//                    if (trendingMovie != null) {
-//                        trendingMovieAdapter.movies=trendingMovie.results
-//                    }
-//                }
-//            }
 
         })
 
 
         binding.thirdRv.apply {
-            upCominingMovieAdapter=MovieAdapter()
+
             adapter=upCominingMovieAdapter
             layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
-            setItemViewCacheSize(12)
+            setItemViewCacheSize(20)
 
 
         }
 
 
-//        viewModel.responseMovie.observe(requireActivity()       ,{listMovies ->
-//           movieAdapter!!.movies=listMovies.results
-//
-//
-//            val img =listMovies.results[0]
-//            Glide.with(requireContext())
-//                .load("http://image.tmdb.org/t/p/w500${img.poster_path}")
-//                .centerCrop()
-//                .into(binding.mainImg)
-//
-//
-//        })
 
 
     }

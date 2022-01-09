@@ -24,17 +24,17 @@ class ComingSoonPageAdapter():RecyclerView.Adapter<ComingSoonPageAdapter.MyHolde
         }
 
     }
-    private val differ=AsyncListDiffer(this,diffCallback)
+     val differ=AsyncListDiffer(this,diffCallback)
 
-    var upComingMovies:List<Result>
-    get() = differ.currentList
-    set(value) {
-        differ.submitList(value)
-    }
+  //  var upComingMovies:List<Result>
+//    get() = differ.currentList
+//    set(value) {
+//        differ.submitList(value)
+//    }
 
 
 
-    override fun getItemCount()= upComingMovies.size
+    override fun getItemCount()= differ.currentList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
 
@@ -42,10 +42,10 @@ class ComingSoonPageAdapter():RecyclerView.Adapter<ComingSoonPageAdapter.MyHolde
     }
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
-        val movie=upComingMovies[position]
+        val movie=  differ.currentList[position]
 
 
-       Glide.with(holder.itemView.context).load("http://image.tmdb.org/t/p/w500${ upComingMovies[position].poster_path}")
+       Glide.with(holder.itemView.context).load("http://image.tmdb.org/t/p/w500${ movie.poster_path}")
            .apply(RequestOptions.placeholderOf(R.drawable.music1))
            //.centerCrop()
           .centerInside()
