@@ -21,12 +21,10 @@
     <string name="smartDownLoad">Smart Download</string>
     <string name="movieDetails">18+ |5 Episodes|4.8GB</string>
 
-
-
+    <string name="rating">8.2 </string>
     <string name="like">5.2 K</string>
-
-
-
+    <string name="details">Details</string>
+    <string name="download">Download</string>
 
 
     <string name="movieDescription">dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</string>

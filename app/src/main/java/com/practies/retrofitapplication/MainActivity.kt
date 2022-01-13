@@ -4,9 +4,7 @@ package com.practies.retrofitapplication
  import androidx.appcompat.app.AppCompatActivity
  import androidx.navigation.findNavController
  import androidx.navigation.ui.setupWithNavController
- import com.google.android.material.bottomnavigation.BottomNavigationMenuView
  import com.google.android.material.bottomnavigation.BottomNavigationView
- import dagger.hilt.android.AndroidEntryPoint
 
 
 class MainActivity : AppCompatActivity() {

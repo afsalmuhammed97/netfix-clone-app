@@ -1,18 +1,14 @@
 package com.practies.retrofitapplication.viewModel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practies.retrofitapplication.Movie
 import com.practies.retrofitapplication.Result
 import com.practies.retrofitapplication.repository.MovieRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-
 import retrofit2.Response
-import javax.inject.Inject
 
 //@HiltViewModel
 
@@ -38,39 +34,70 @@ class MoviesViewModel(private val repository: MovieRepository):ViewModel() {
      }
 
      fun getTopRatedMovies() {
-         viewModelScope.launch {
-             val response: Response<Movie> = repository.getTopRatedMovies()
-             topRatedMovieLiveData.value = response
-             Log.i("MoveiViewModel", "getTopRatedMovies called")
+
+
+         try {
+
+             viewModelScope.launch {
+                 val response: Response<Movie> = repository.getTopRatedMovies()
+
+
+                 topRatedMovieLiveData.value = response
+             }
+         }catch (e:Exception){
+             Log.i("Exception","Request failed")
          }
+
+
+
+
+
+
      }
 
      fun getUpComingMovies() {
-         viewModelScope.launch {
-             val response: Response<Movie> = repository.getUpComingMovies()
-             upComingMovieLiveData.value = response
-             Log.i("MoveiViewModel", "getUpcomingMovies called")
+         try {
+             viewModelScope.launch {
+                 val response: Response<Movie> = repository.getUpComingMovies()
+                 upComingMovieLiveData.value = response
+                 Log.i("MoveiViewModel", "getUpcomingMovies called")
 
+             }
+         }catch (e:Exception){
+             Log.i("Exception","Request failed")
          }
+
      }
 
      fun getNowPlayingMovies() {
-         viewModelScope.launch {
-             val response: Response<Movie> = repository.getNowPlayingMovies()
-             nowPLayingMovieLiveData.value = response
-             Log.i("MoveiViewModel", "getNowPlayingMovies called")
+         try {
+             viewModelScope.launch {
+                 val response: Response<Movie> = repository.getNowPlayingMovies()
+                 nowPLayingMovieLiveData.value = response
+                 Log.i("MoveiViewModel", "getNowPlayingMovies called")
 
+             }
+
+         }catch (e:Exception){
+             Log.i("Exception","Request failed")
          }
      }
 
      fun getPopularMovies() {
-         viewModelScope.launch {
-             val response: Response<Movie> = repository.getPopularMovies()
-             popularMoviesLiveData.value = response
-             Log.i("MoveiViewModel", "getPopulerMovies called")
-             funMovieList=response.body()!!.results
 
+         try {
+             viewModelScope.launch {
+                 val response: Response<Movie> = repository.getPopularMovies()
+                 popularMoviesLiveData.value = response
+
+                 funMovieList=response.body()!!.results
+
+             }
+
+         }catch (e:Exception){
+             Log.i("Exception","Request failed")
          }
+
      }
 
  }

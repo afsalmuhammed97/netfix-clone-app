@@ -1,21 +1,18 @@
-package com.practies.retrofitapplication
+package com.practies.retrofitapplication.Ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.practies.retrofitapplication.HomeFragment.Companion.testList
 import com.practies.retrofitapplication.adapters.FastLaughAdapter
 import com.practies.retrofitapplication.databinding.FragmentFastLaughsBinding
 import com.practies.retrofitapplication.repository.MovieRepository
 import com.practies.retrofitapplication.viewModel.MovieViewModelFactory
 import com.practies.retrofitapplication.viewModel.MoviesViewModel
-import retrofit2.Response
 
 class FastLaughsFragment : Fragment() {
    lateinit var binding: FragmentFastLaughsBinding

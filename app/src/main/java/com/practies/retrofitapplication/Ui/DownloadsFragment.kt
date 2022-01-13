@@ -1,4 +1,4 @@
-package com.practies.retrofitapplication
+package com.practies.retrofitapplication.Ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle

@@ -1,15 +1,15 @@
 package com.practies.retrofitapplication.repository
 
-import android.util.Log
 import com.practies.retrofitapplication.Movie
-import com.practies.retrofitapplication.api.ApiService
 import com.practies.retrofitapplication.api.RetrofitInstance
-import com.practies.retrofitapplication.helper.Constants
 import retrofit2.Response
-import javax.inject.Inject
 
 class MovieRepository{
+
+
     suspend fun  getPopularMovies():Response<Movie>{
+
+
         return RetrofitInstance.api.getPopularMovies()
     }
     suspend fun  getTopRatedMovies():Response<Movie>{

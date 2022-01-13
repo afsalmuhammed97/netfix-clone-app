@@ -1,5 +1,7 @@
 package com.practies.retrofitapplication.adapters
 
+import android.content.Context
+import android.content.Intent
 import android.renderscript.Type
 import android.view.LayoutInflater
 import android.view.View
@@ -12,17 +14,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.practies.retrofitapplication.Movie
 import com.practies.retrofitapplication.MovieResult
 import com.practies.retrofitapplication.R
 import com.practies.retrofitapplication.Result
+import com.practies.retrofitapplication.Ui.MovieActivity
 import com.practies.retrofitapplication.databinding.MovieViewBinding
 import com.practies.retrofitapplication.databinding.SampleViewBinding
 
 //   (var movies: List<Result> )
 class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
 
-    class MovieHolder(val binding:MovieViewBinding):RecyclerView.ViewHolder(binding.root)
+    class MovieHolder(val binding: MovieViewBinding):RecyclerView.ViewHolder(binding.root)
 
 private val diffCallback = object :DiffUtil.ItemCallback<Result>(){
     override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
@@ -62,10 +66,27 @@ private val diffCallback = object :DiffUtil.ItemCallback<Result>(){
              .into(holder.binding.movieImage1)
 
 
+             holder.itemView.setOnClickListener {
+                 val intent=Intent(holder.itemView.context,MovieActivity::class.java)
+                 intent.putExtra("movie",movies)
+                 holder.itemView.context.startActivity(intent)
 
+             }
 
 
     }
+//
+//    fun bottomDialog( context:Context){
+//        val bottomSheetDialog= BottomSheetDialog(
+//            context, R.style.BottomSheetDialogTheem
+//        )
+//        val bottomSheetView=LayoutInflater.from(context).inflate(
+//            R.layout.bottom_sheet_dialog,null )
+//
+//
+//        bottomSheetDialog.setContentView(bottomSheetView)
+//        bottomSheetDialog.show()
+//    }
 
 //    private val diffCallBack=object :DiffUtil.ItemCallback<MovieResult>(){
 //

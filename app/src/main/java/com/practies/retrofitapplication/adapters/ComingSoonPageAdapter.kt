@@ -26,12 +26,6 @@ class ComingSoonPageAdapter():RecyclerView.Adapter<ComingSoonPageAdapter.MyHolde
     }
      val differ=AsyncListDiffer(this,diffCallback)
 
-  //  var upComingMovies:List<Result>
-//    get() = differ.currentList
-//    set(value) {
-//        differ.submitList(value)
-//    }
-
 
 
     override fun getItemCount()= differ.currentList.size
@@ -46,9 +40,10 @@ class ComingSoonPageAdapter():RecyclerView.Adapter<ComingSoonPageAdapter.MyHolde
 
 
        Glide.with(holder.itemView.context).load("http://image.tmdb.org/t/p/w500${ movie.poster_path}")
-           .apply(RequestOptions.placeholderOf(R.drawable.music1))
-           //.centerCrop()
-          .centerInside()
+
+           .apply(RequestOptions().placeholder(R.drawable.music1))
+           //.RequestOptions.placeholderOf(R.drawable.music1)
+           .centerCrop()
            .into(holder.binding.moviePoster)
 
 
