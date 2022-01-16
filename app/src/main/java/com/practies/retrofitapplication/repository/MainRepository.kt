@@ -13,5 +13,12 @@ class MainRepository(private val api:ApiService):BaseRepository() {
     suspend fun getUpcomingMovies()=safeApiCall {
         api.getUpComingMovies()
     }
+    suspend fun getTrendingMovies()=safeApiCall {
+        api.getNowPlaying()
+    }
+
+    suspend fun getTopRatedMovies()=safeApiCall {
+        api.getTopRatedMovies()
+    }
 
 }

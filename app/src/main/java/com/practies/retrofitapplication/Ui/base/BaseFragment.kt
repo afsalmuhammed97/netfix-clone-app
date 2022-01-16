@@ -6,15 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.practies.retrofitapplication.api.RetrofitInstance
 import com.practies.retrofitapplication.repository.BaseRepository
+import com.practies.retrofitapplication.viewModel.MovieViewModelFactory
 
 abstract class BaseFragment<viewModel:ViewModel,viewBinding:ViewBinding,repositoryB:BaseRepository>:Fragment()
 {
     protected  lateinit var binding: viewBinding
-
-    protected val retrofitInstance= RetrofitInstance
+     lateinit var viewModel: viewModel
+    protected val retrofitInstance=RetrofitInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,6 +24,10 @@ abstract class BaseFragment<viewModel:ViewModel,viewBinding:ViewBinding,reposito
         savedInstanceState: Bundle?
     ): View? {
        binding=getFragmentBinding(inflater,container)
+     // val factory=MovieViewModelFactory(getFragmentRepository())
+        val factory=MovieViewModelFactory(getFragmentRepository())
+
+        viewModel=ViewModelProvider(this,factory).get(getViewModel())
 
         return binding.root
 
@@ -29,5 +35,5 @@ abstract class BaseFragment<viewModel:ViewModel,viewBinding:ViewBinding,reposito
 
     abstract fun getViewModel():Class<viewModel>
     abstract fun getFragmentBinding(inflater: LayoutInflater,container: ViewGroup?):viewBinding
-    abstract fun getFragmentRepository():Class<repositoryB>
+    abstract fun getFragmentRepository():repositoryB
 }

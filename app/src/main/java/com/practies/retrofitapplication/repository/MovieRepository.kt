@@ -6,23 +6,23 @@ import retrofit2.Response
 
 class MovieRepository{
 
-
-    suspend fun  getPopularMovies():Response<Movie>{
-
-
-        return RetrofitInstance.api.getPopularMovies()
-    }
-    suspend fun  getTopRatedMovies():Response<Movie>{
-        return RetrofitInstance.api.getTopRatedMovies()
-    }
-
-    suspend fun  getNowPlayingMovies():Response<Movie>{
-        return RetrofitInstance.api.getNowPlaying()
-    }
-
-    suspend fun  getUpComingMovies():Response<Movie>{
-        return RetrofitInstance.api.getUpComingMovies()
-    }
+//
+//    suspend fun  getPopularMovies():Response<Movie>{
+//
+//
+//        return RetrofitInstance.api.getPopularMovies()
+//    }
+//    suspend fun  getTopRatedMovies():Response<Movie>{
+//        return RetrofitInstance.api.getTopRatedMovies()
+//    }
+//
+//    suspend fun  getNowPlayingMovies():Response<Movie>{
+//        return RetrofitInstance.api.getNowPlaying()
+//    }
+//
+//    suspend fun  getUpComingMovies():Response<Movie>{
+//        return RetrofitInstance.api.getUpComingMovies()
+//    }
 
 //    suspend fun  getLatestMovies():Response<Movie>{
 //        return RetrofitInstance.api.getLatest()
