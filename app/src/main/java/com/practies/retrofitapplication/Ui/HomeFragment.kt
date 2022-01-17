@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.practies.retrofitapplication.Ui.base.BaseFragment
 import com.practies.retrofitapplication.Utill.handleApiError
+import com.practies.retrofitapplication.Utill.loadImage
 import com.practies.retrofitapplication.adapters.MovieAdapter
 import com.practies.retrofitapplication.api.ApiService
 import com.practies.retrofitapplication.api.Resource
@@ -74,6 +74,7 @@ class HomeFragment : BaseFragment<MainViewModel,FragmentHomeBinding,MainReposito
                     trendingMovieAdapter.differ.submitList(data)
                     trendingMovieAdapter.notifyDataSetChanged()
                     setThirdRv()
+                    loadImage(data[0],binding.mainImg)
                 }
                 is Resource.Failure->{
                     handleApiError(it)
@@ -141,63 +142,7 @@ class HomeFragment : BaseFragment<MainViewModel,FragmentHomeBinding,MainReposito
 
 
 
-//
-//    lateinit var binding: FragmentHomeBinding
-//   lateinit var popularMovieAdapter: MovieAdapter
-//   lateinit var topRatedMovieAdapter: MovieAdapter
-//   lateinit var upCominingMovieAdapter: MovieAdapter
-//
-//    var successRequest: Boolean = false
-//
-//
-//
-//
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        // makeApiRequest()
-//
-//
-//    }
-//
-//
-//    @SuppressLint("NotifyDataSetChanged")
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-//    ): View {
-//        binding = FragmentHomeBinding.inflate(inflater, container, false)
-//
-//
-//        val repository=MovieRepository()
-//        val viewModelFactory=MovieViewModelFactory(repository)
-//
-//
-////        if (!successRequest){  binding.progressBar1.visibility = View.VISIBLE
-////                                binding.progressBar2.visibility = View.VISIBLE
-////                                binding.progressBar3.visibility = View.VISIBLE }
-////
-//
-//        //  makeApiRequestAndShowResult()
-//
-//
-//        setMovieView()
-//
-//
-//
-//
-//
-//        return binding.root
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        setMovieView()
-//    }
-//
-//    @SuppressLint("NotifyDataSetChanged")
-//    private fun setMovieView() {
-//        topRatedMovieAdapter= MovieAdapter()
-//        popularMovieAdapter = MovieAdapter()
+
 //        upCominingMovieAdapter=MovieAdapter()
 //        viewModel.popularMoviesLiveData.observe(viewLifecycleOwner,{Response->
 //

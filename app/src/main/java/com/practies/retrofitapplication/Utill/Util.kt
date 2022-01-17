@@ -3,10 +3,12 @@ package com.practies.retrofitapplication.Utill
 import android.app.Activity
 import android.content.Intent
 import android.view.View
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
-import com.practies.retrofitapplication.Movie
+
+import com.practies.retrofitapplication.Result
 import com.practies.retrofitapplication.api.Resource
 
 fun <A:Activity>Activity.startNewActivity(activity: Class<A>){
@@ -52,13 +54,13 @@ fun Fragment.handleApiError(failure: Resource.Failure, retry:(() ->Unit) ?=null 
 }
 
 
-fun Fragment.loadImage(){
+fun Fragment.loadImage(img: Result,imageView:ImageView){
 
-//    Glide.with(requireContext())
-//                .load("http://image.tmdb.org/t/p/w500${img.backdrop_path}")    //poster_path
-//                //.centerCrop()
-//                .fitCenter()
-//               .into(binding.mainImg)
+    Glide.with(requireContext())
+                .load("http://image.tmdb.org/t/p/w500${img.backdrop_path}")    //poster_path
+                //.centerCrop()
+                .fitCenter()
+               .into(imageView)
 
 
 }
