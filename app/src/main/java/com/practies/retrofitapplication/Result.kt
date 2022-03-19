@@ -22,9 +22,3 @@ data class Result(
 
     ):Serializable
 
-// val genre_ids: List<Int>,
-// val original_title: String,
-// val popularity: Double,
-//   val video: Boolean,
-//  val vote_average: Double,
-//   val vote_count: Int

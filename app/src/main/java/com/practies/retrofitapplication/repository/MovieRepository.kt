@@ -8,42 +8,20 @@ import com.practies.retrofitapplication.helper.Constants
 import retrofit2.Response
 import javax.inject.Inject
 
-class MovieRepository{
-    suspend fun  getPopularMovies():Response<Movie>{
-        return RetrofitInstance.api.getPopularMovies()
-    }
-    suspend fun  getTopRatedMovies():Response<Movie>{
-        return RetrofitInstance.api.getTopRatedMovies()
-    }
+class MovieRepository @Inject constructor(private val apiService: ApiService){
 
-    suspend fun  getNowPlayingMovies():Response<Movie>{
-        return RetrofitInstance.api.getNowPlaying()
-    }
+    suspend fun  getPopularMovies()=apiService.getPopularMovies()
 
-    suspend fun  getUpComingMovies():Response<Movie>{
-        return RetrofitInstance.api.getUpComingMovies()
-    }
+    suspend fun  getTopRatedMovies()=apiService.getTopRatedMovies()
 
-//    suspend fun  getLatestMovies():Response<Movie>{
+    suspend fun  getNowPlayingMovies()=apiService.getNowPlaying()
+
+    suspend fun  getUpComingMovies()=apiService.getUpComingMovies()
+
+//    suspend fun  getLatestMovies():Res=ponse<Movie>{
 //        return RetrofitInstance.api.getLatest()
 //
 //    }
 
 
 }
-
-//       constructor( private val ApiService: ApiService){
-//
-//
-//    suspend fun getPopularMovies()=ApiService.getPopularMovies(Constants.APIKEY)
-//
-//    suspend fun getNowPlayingMovies()=ApiService.getNowPlaying(Constants.APIKEY)
-//
-//    suspend fun getUpComingMovies()=ApiService.getUpComingMovies(Constants.APIKEY)
-//
-//    suspend fun getLatestMovies()=ApiService.getLatest(Constants.APIKEY)
-//
-//    suspend fun getTopRatedMovies()=ApiService.getTopRatedMovies(Constants.APIKEY)
-//
-//
-//}

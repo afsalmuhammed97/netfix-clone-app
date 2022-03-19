@@ -14,12 +14,10 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
 
-//@HiltViewModel
+@HiltViewModel
 
-//somfsfs
 
- //@Inject  constructor(private val repository: MovieRepository):ViewModel()
-class MoviesViewModel(private val repository: MovieRepository):ViewModel() {
+class MoviesViewModel @Inject constructor ( private val repository: MovieRepository):ViewModel() {
      val popularMoviesLiveData = MutableLiveData<Response<Movie>>()
      val topRatedMovieLiveData = MutableLiveData<Response<Movie>>()
      val upComingMovieLiveData = MutableLiveData<Response<Movie>>()
@@ -37,7 +35,7 @@ class MoviesViewModel(private val repository: MovieRepository):ViewModel() {
 
      }
 
-     fun getTopRatedMovies() {
+     private fun getTopRatedMovies() {
          viewModelScope.launch {
              val response: Response<Movie> = repository.getTopRatedMovies()
              topRatedMovieLiveData.value = response
@@ -45,7 +43,7 @@ class MoviesViewModel(private val repository: MovieRepository):ViewModel() {
          }
      }
 
-     fun getUpComingMovies() {
+     private fun getUpComingMovies() {
          viewModelScope.launch {
              val response: Response<Movie> = repository.getUpComingMovies()
              upComingMovieLiveData.value = response
@@ -54,7 +52,7 @@ class MoviesViewModel(private val repository: MovieRepository):ViewModel() {
          }
      }
 
-     fun getNowPlayingMovies() {
+     private fun getNowPlayingMovies() {
          viewModelScope.launch {
              val response: Response<Movie> = repository.getNowPlayingMovies()
              nowPLayingMovieLiveData.value = response
@@ -63,7 +61,7 @@ class MoviesViewModel(private val repository: MovieRepository):ViewModel() {
          }
      }
 
-     fun getPopularMovies() {
+     private fun getPopularMovies() {
          viewModelScope.launch {
              val response: Response<Movie> = repository.getPopularMovies()
              popularMoviesLiveData.value = response

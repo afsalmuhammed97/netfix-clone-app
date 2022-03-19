@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,15 +33,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 /// commit a067f2b4aa78811d4b6aa2e8357df92b3522afd4  on git
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     companion object {
         var testList = listOf<Result>()
     }
 
-   // private val viewModel: MoviesViewModel     by viewModels()
 
-    lateinit var viewModel:MoviesViewModel
+
+    private val viewModel by activityViewModels<MoviesViewModel>()
 
     lateinit var binding: FragmentHomeBinding
    lateinit var popularMovieAdapter: MovieAdapter
@@ -53,12 +54,7 @@ class HomeFragment : Fragment() {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // makeApiRequest()
 
-
-    }
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -68,16 +64,13 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
-        val repository=MovieRepository()
-        val viewModelFactory=MovieViewModelFactory(repository)
 
-        viewModel=ViewModelProvider(this,viewModelFactory).get(MoviesViewModel::class.java)
 //        if (!successRequest){  binding.progressBar1.visibility = View.VISIBLE
 //                                binding.progressBar2.visibility = View.VISIBLE
 //                                binding.progressBar3.visibility = View.VISIBLE }
 //
 
-        //  makeApiRequestAndShowResult()
+
 
 
         setMovieView()
@@ -99,32 +92,32 @@ class HomeFragment : Fragment() {
         topRatedMovieAdapter= MovieAdapter()
         popularMovieAdapter = MovieAdapter()
         upCominingMovieAdapter=MovieAdapter()
-        viewModel.popularMoviesLiveData.observe(viewLifecycleOwner,{Response->
+        viewModel.popularMoviesLiveData.observe(viewLifecycleOwner) { Response ->
 
-            if (Response.isSuccessful && Response.code()==200){
-                Response.body().let { popularMovie->
+            if (Response.isSuccessful && Response.code() == 200) {
+                Response.body().let { popularMovie ->
                     if (popularMovie != null) {
                         popularMovieAdapter.differ.submitList(popularMovie.results)
-                        popularMovieAdapter.notifyDataSetChanged()         // movies=popularMovie.results
-                        //  popularMovieAdapter.notifyDataSetChanged()
-                        val img =popularMovie.results[0]
-            Glide.with(requireContext())
-                .load("http://image.tmdb.org/t/p/w500${img.backdrop_path}")    //poster_path
-                //.centerCrop()
-                .fitCenter()
-               .into(binding.mainImg)
+                        popularMovieAdapter.notifyDataSetChanged()
 
-                    }else{
-                        Toast.makeText(context,"data null",Toast.LENGTH_SHORT).show()
+                        val img = popularMovie.results[0]
+                        Glide.with(requireContext())
+                            .load("http://image.tmdb.org/t/p/w500${img.backdrop_path}")    //poster_path
+                            //.centerCrop()
+                            .fitCenter()
+                            .into(binding.mainImg)
+
+                    } else {
+                        Toast.makeText(context, "data null", Toast.LENGTH_SHORT).show()
                     }
 
                 }
-            }else{
+            } else {
                 binding.progressBar1.visibility = View.VISIBLE
                 binding.progressBar0.visibility = View.VISIBLE
             }
 
-        })
+        }
         binding.firstRv.apply {
 
             adapter= popularMovieAdapter
@@ -137,19 +130,19 @@ class HomeFragment : Fragment() {
 
 
 
-        viewModel.topRatedMovieLiveData.observe(viewLifecycleOwner,{Response->
-            if (Response.isSuccessful && Response.code()==200){
-                Response.body().let { topRatedMovie->
+        viewModel.topRatedMovieLiveData.observe(viewLifecycleOwner) { Response ->
+            if (Response.isSuccessful && Response.code() == 200) {
+                Response.body().let { topRatedMovie ->
                     if (topRatedMovie != null) {
-                       topRatedMovieAdapter.differ.submitList(topRatedMovie.results)
+                        topRatedMovieAdapter.differ.submitList(topRatedMovie.results)
                         topRatedMovieAdapter.notifyDataSetChanged()
                         //trendingMovieAdapter.movies=topRatedMovie.results
                     }
                 }
-            }else{
+            } else {
                 binding.progressBar2.visibility = View.VISIBLE
             }
-        })
+        }
         binding.secondRv.apply {
 
 
@@ -164,22 +157,22 @@ class HomeFragment : Fragment() {
 
 
 
-        viewModel.upComingMovieLiveData.observe(viewLifecycleOwner,{Response->
+        viewModel.upComingMovieLiveData.observe(viewLifecycleOwner) { Response ->
 
-            if (Response.isSuccessful && Response.code()==200){
-                Response.body().let { upComingMovie->
+            if (Response.isSuccessful && Response.code() == 200) {
+                Response.body().let { upComingMovie ->
                     if (upComingMovie != null) {
-                    upCominingMovieAdapter.differ.submitList(upComingMovie.results)
+                        upCominingMovieAdapter.differ.submitList(upComingMovie.results)
                         upCominingMovieAdapter.notifyDataSetChanged()
                     }
                 }
 
-            }else{
+            } else {
                 binding.progressBar3.visibility = View.VISIBLE
             }
 
 
-        })
+        }
 
 
         binding.thirdRv.apply {
