@@ -2,41 +2,26 @@ package com.practies.retrofitapplication
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.practies.retrofitapplication.helper.Constants.APIKEY
-import com.practies.retrofitapplication.helper.Constants.BASE_URL
 import com.practies.retrofitapplication.adapters.MovieAdapter
-import com.practies.retrofitapplication.api.ApiService
 import com.practies.retrofitapplication.databinding.FragmentHomeBinding
-import com.practies.retrofitapplication.repository.MovieRepository
-import com.practies.retrofitapplication.viewModel.MovieViewModelFactory
+import com.practies.retrofitapplication.model.Movie
 import com.practies.retrofitapplication.viewModel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.internal.notifyAll
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /// commit a067f2b4aa78811d4b6aa2e8357df92b3522afd4  on git
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     companion object {
-        var testList = listOf<Result>()
+        var testList = listOf<Movie>()
     }
 
 
@@ -97,15 +82,15 @@ class HomeFragment : Fragment() {
             if (Response.isSuccessful && Response.code() == 200) {
                 Response.body().let { popularMovie ->
                     if (popularMovie != null) {
-                        popularMovieAdapter.differ.submitList(popularMovie.results)
+                        popularMovieAdapter.differ.submitList(popularMovie.movie)
                         popularMovieAdapter.notifyDataSetChanged()
 
-                        val img = popularMovie.results[0]
-                        Glide.with(requireContext())
-                            .load("http://image.tmdb.org/t/p/w500${img.backdrop_path}")    //poster_path
-                            //.centerCrop()
-                            .fitCenter()
-                            .into(binding.mainImg)
+//                        val img = popularMovie.movies[0]
+//                        Glide.with(requireContext())
+//                            .load("http://image.tmdb.org/t/p/w500${img.backdrop_path}")    //poster_path
+//                            //.centerCrop()
+//                            .fitCenter()
+//                            .into(binding.mainImg)
 
                     } else {
                         Toast.makeText(context, "data null", Toast.LENGTH_SHORT).show()
@@ -134,9 +119,9 @@ class HomeFragment : Fragment() {
             if (Response.isSuccessful && Response.code() == 200) {
                 Response.body().let { topRatedMovie ->
                     if (topRatedMovie != null) {
-                        topRatedMovieAdapter.differ.submitList(topRatedMovie.results)
+                        topRatedMovieAdapter.differ.submitList(topRatedMovie.movie)
                         topRatedMovieAdapter.notifyDataSetChanged()
-                        //trendingMovieAdapter.movies=topRatedMovie.results
+                        //trendingMovieAdapter.movies=topRatedMovie.movies
                     }
                 }
             } else {
@@ -162,7 +147,7 @@ class HomeFragment : Fragment() {
             if (Response.isSuccessful && Response.code() == 200) {
                 Response.body().let { upComingMovie ->
                     if (upComingMovie != null) {
-                        upCominingMovieAdapter.differ.submitList(upComingMovie.results)
+                        upCominingMovieAdapter.differ.submitList(upComingMovie.movie)
                         upCominingMovieAdapter.notifyDataSetChanged()
                     }
                 }

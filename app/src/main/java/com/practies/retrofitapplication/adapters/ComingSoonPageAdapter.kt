@@ -8,25 +8,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.practies.retrofitapplication.R
-import com.practies.retrofitapplication.Result
+import com.practies.retrofitapplication.model.Movie
 import com.practies.retrofitapplication.databinding.ComingSoonItemBinding
-//val upComingMovies: List<Result>
+//val upComingMovies: List<Movie>
 class ComingSoonPageAdapter():RecyclerView.Adapter<ComingSoonPageAdapter.MyHolder>() {
     class MyHolder (val binding: ComingSoonItemBinding):RecyclerView.ViewHolder(binding.root)
 
-    private val diffCallback=object :DiffUtil.ItemCallback<Result>(){
-        override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
+    private val diffCallback=object :DiffUtil.ItemCallback<Movie>(){
+        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
           return oldItem.id==newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
+        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
           return  newItem ==oldItem
         }
 
     }
      val differ=AsyncListDiffer(this,diffCallback)
 
-  //  var upComingMovies:List<Result>
+  //  var upComingMovies:List<Movie>
 //    get() = differ.currentList
 //    set(value) {
 //        differ.submitList(value)

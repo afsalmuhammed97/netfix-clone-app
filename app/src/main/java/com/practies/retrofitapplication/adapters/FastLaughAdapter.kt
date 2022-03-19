@@ -9,17 +9,17 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.practies.retrofitapplication.R
 import com.practies.retrofitapplication.databinding.FastLaughItemBinding
-import com.practies.retrofitapplication.Result
-//val posterList:List<com.practies.retrofitapplication.Result>
+import com.practies.retrofitapplication.model.Movie
+//val posterList:List<com.practies.retrofitapplication.model.Movie>
 class FastLaughAdapter ():RecyclerView.Adapter< FastLaughAdapter.MyHolder>() {
     class MyHolder(val binding: FastLaughItemBinding) : RecyclerView.ViewHolder(binding.root)
 
- private val diffCallback=object :DiffUtil.ItemCallback<Result>(){
-     override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
+ private val diffCallback=object :DiffUtil.ItemCallback<Movie>(){
+     override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
         return oldItem.id==newItem.id
      }
 
-     override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
+     override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
         return newItem==oldItem
      }
 

@@ -7,12 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.practies.retrofitapplication.adapters.DownLoadAdapter
 import com.practies.retrofitapplication.databinding.FragmentDownloadsBinding
-import com.practies.retrofitapplication.repository.MovieRepository
-import com.practies.retrofitapplication.viewModel.MovieViewModelFactory
 import com.practies.retrofitapplication.viewModel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,7 +39,7 @@ class DownloadsFragment : Fragment() {
             if (Response.isSuccessful && Response.code() == 200) {
                 Response.body().let { nowPlayingMovie ->
                     if (nowPlayingMovie != null) {
-                        downLoadAdapter.differ.submitList(nowPlayingMovie.results)
+                        downLoadAdapter.differ.submitList(nowPlayingMovie.movie)
                         downLoadAdapter.notifyDataSetChanged()
 
                     }

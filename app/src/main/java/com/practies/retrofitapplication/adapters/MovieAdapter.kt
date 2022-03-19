@@ -1,37 +1,29 @@
 package com.practies.retrofitapplication.adapters
 
-import android.renderscript.Type
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.request.RequestOptions
-import com.practies.retrofitapplication.Movie
-import com.practies.retrofitapplication.MovieResult
 import com.practies.retrofitapplication.R
-import com.practies.retrofitapplication.Result
+import com.practies.retrofitapplication.model.Movie
 import com.practies.retrofitapplication.databinding.MovieViewBinding
-import com.practies.retrofitapplication.databinding.SampleViewBinding
 
-//   (var movies: List<Result> )
+//   (var movies: List<Movie> )
 class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
 
     class MovieHolder(val binding:MovieViewBinding):RecyclerView.ViewHolder(binding.root)
 
-private val diffCallback = object :DiffUtil.ItemCallback<Result>(){
-    override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
+private val diffCallback = object :DiffUtil.ItemCallback<Movie>(){
+    override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
 
     return  oldItem.id==newItem.id
 
     }
 
-    override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
+    override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
     return newItem ==oldItem
     }
 
@@ -39,7 +31,7 @@ private val diffCallback = object :DiffUtil.ItemCallback<Result>(){
 
     val   differ=AsyncListDiffer(this,diffCallback)
 
-//    var movies:List<Result>
+//    var movies:List<Movie>
 //    get() = differ.currentList
 //          set(value) {
 //              differ.submitList(value)

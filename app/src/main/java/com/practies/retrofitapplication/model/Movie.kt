@@ -1,13 +1,10 @@
-package com.practies.retrofitapplication
-//<T>
-data class Movie(
-    val page: Int,
-    val results: List<Result>,
-    val total_pages: Int,
-    val total_results: Int
-)
+package com.practies.retrofitapplication.model
 
-data class MovieResult(
+import android.os.Parcelable
+import java.io.Serializable
+
+
+data class Movie(
     val adult: Boolean,
     val backdrop_path: String,
     val genre_ids: List<Int>,
@@ -22,4 +19,6 @@ data class MovieResult(
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int
-)
+
+    ):Serializable
+
